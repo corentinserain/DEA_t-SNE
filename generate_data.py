@@ -7,13 +7,13 @@ import numpy as np
 
 
 def scaler(dataset):
-    """ization between 0 and 1 of data. 
+    """Normalization between 0 and 1 of data, using MinMaxScaler function.
 
     Args:
-        dataset (numpy.ndarray): 
+        dataset (numpy.ndarray): Contains several data to be normalized.
 
     Returns:
-        numpy.ndarray: 
+        numpy.ndarray: Contains normalized data between 0 and 1.
     """
     scaler = MinMaxScaler()
     scaler.fit(dataset)
@@ -21,14 +21,18 @@ def scaler(dataset):
 
 
 def data_generation_mc(file, samples, features, classes, informative):
-    """_summary_
+    """Generating of random data with the make_classification function with all given parameter combinations and creating files in CSV format.
+    When the number of classes is equal to 1, the data follows a normal distribution. 
+    When the number of classes is higher than 1, the data are separated into clusters. 
+    The name of the CSV files created corresponds to the following form: 
+        distribution_samples_features_classes_(p_informative*100).csv
 
     Args:
-        file (str): 
-        samples (list): Values for the number of samples to generate
-        features (list): Values for the number of features to generate
-        classes (list): 
-        informative (list):
+        file (str): The name of the folder where the CSV files are generated.
+        samples (list): Values for the number of samples to generate.
+        features (list): Values for the number of features to generate.
+        classes (list): Values defining the number of classes.
+        informative (list): Proportion of features that are informative.
     """
     all_parameters = list(product(samples, features, classes, informative))
     count_norm = 0
@@ -57,12 +61,15 @@ def data_generation_mc(file, samples, features, classes, informative):
         
 
 def data_generation_uni(file, samples, features):
-    """_summary_
+    """Generating of random data with the make_classification function with all given parameter combinations and creating files in CSV format.
+    The data follows a uniform distribution.
+    The name of the CSV files created corresponds to the following form: 
+        distribution_samples_features.csv
 
     Args:
-        file (str): 
-        samples (list): Values for the number of samples to generate
-        features (list): Values for the number of features to generate
+        file (str): The name of the folder where the CSV files are generated.
+        samples (list): Values for the number of samples to generate.
+        features (list): Values for the number of features to generate.
     """
     all_parameters = list(product(samples, features))
     count = 0
