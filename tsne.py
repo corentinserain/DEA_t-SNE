@@ -3,6 +3,8 @@ import sklearn
 import pandas as pd
 import numpy as np
 from itertools import product
+from sklearn.preprocessing import MinMaxScaler
+from generate_data import scaler
 
 import os
 
@@ -15,10 +17,11 @@ def tsne(file, output_folder, perplexity, n_iter):
     filename, _ = os.path.splitext(filename)
     for perplexity_val, n_iter_val in all_parameters:
         tsne = sklearn.manifold.TSNE(perplexity = perplexity_val, n_iter = n_iter_val)
-        tsne.fit_transform(df)
+        tsne_result = pd.DataFrame(scaler(tsne.fit_transform(df)))
+
         if not os.path.exists(output_folder):
             os.makedirs(output_folder)
-        df.to_csv(f'{output_folder}/{perplexity_val}_{n_iter_val}_{filename}.csv')
+        tsne_result.to_csv(f'{output_folder}/{perplexity_val}_{n_iter_val}_{filename}.csv')
 
 def tsne_all(input_folder, output_folder, perplexity, n_iter):
     for file in os.listdir(input_folder):
