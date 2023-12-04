@@ -21,9 +21,9 @@ data_uni = data_generation_uni(folder, 5, samples, features)
 perplexity = [10, 30, 50]
 n_iter = [300, 500, 1000]
 
-t_sne_norm = tsne_all(data_norm,"./t_sne/norm",perplexity, n_iter)
-t_sne_uni = tsne_all(data_uni,"./t_sne/uni",perplexity, n_iter)
-t_sne_cluster = tsne_all(data_cluster,"./t_sne/cluster",perplexity, n_iter)
+# t_sne_norm = tsne_all(data_norm,"./t_sne/norm",perplexity, n_iter)
+# t_sne_uni = tsne_all(data_uni,"./t_sne/uni",perplexity, n_iter, False)
+t_sne_cluster = tsne_all(data_cluster,"./t_sne/cluster",perplexity, n_iter, True)
 
 
 #Metrics
