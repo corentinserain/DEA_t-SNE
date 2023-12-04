@@ -38,6 +38,8 @@ def data_generation_mc(folder, rep, samples, features, classes, informative):
     all_parameters = list(product(samples, features, classes, informative))
     count_norm = 0
     count_cluster = 0
+    liste_norm = []
+    liste_cluster = []
     if not os.path.exists(folder):
         os.makedirs(folder)
     for i in range(rep) : 
@@ -55,15 +57,20 @@ def data_generation_mc(folder, rep, samples, features, classes, informative):
                 if not os.path.exists(f'{folder}/norm'):
                     os.makedirs(f'{folder}/norm')
                 count_norm += 1
-                dataset.to_csv(f'{folder}/norm/{n_samples}_{n_features}_{n_classes}_{int(p_informative*100)}_{i}.csv')
+                dataset.to_csv(f'{folder}/norm/{n_samples}_{n_features}_{n_classes}_{int(p_informative*100)}_{i}.csv') 
+                dataset.name = f'{n_samples}_{n_features}_{n_classes}_{int(p_informative*100)}_{i}'
+                liste_norm.append(dataset)
             else : 
                 if not os.path.exists(f'{folder}/cluster'):
                     os.makedirs(f'{folder}/cluster')
                 count_cluster += 1
                 dataset.to_csv(f'{folder}/cluster/{n_samples}_{n_features}_{n_classes}_{int(p_informative*100)}_{i}.csv')
-            
+                dataset.name = f'{n_samples}_{n_features}_{n_classes}_{int(p_informative*100)}_{i}'
+                liste_cluster.append(dataset)
+ 
     print(f'{count_norm} CSV files have been created with data following a normal distribution.')
     print(f'{count_cluster} CSV files have been created with data following a cluster distribution.')
+    return liste_norm, liste_cluster
         
 
 def data_generation_uni(folder, rep, samples, features):
@@ -80,6 +87,7 @@ def data_generation_uni(folder, rep, samples, features):
     """
     all_parameters = list(product(samples, features))
     count = 0
+    liste = []
     if not os.path.exists(f'{folder}/uni'):
         os.makedirs(f'{folder}/uni')
     for i in range(rep) : 
@@ -87,7 +95,13 @@ def data_generation_uni(folder, rep, samples, features):
             count += 1
             dataset = pd.DataFrame(np.random.uniform(size=(n_samples, n_features)))
             dataset.to_csv(f'{folder}/uni/{n_samples}_{n_features}_{i}.csv')
+            dataset.name = f'{n_samples}_{n_features}_{i}'
+            liste.append(dataset)
+
     print(f'{count} CSV files have been created with data following a uniform distribution.')
+    return liste
+
+
         
 
 
