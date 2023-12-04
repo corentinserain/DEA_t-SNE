@@ -5,11 +5,10 @@ from tsne import tsne_all
 
 
 #Generation des données
-#samples = [100, 200, 400, 600, 800, 1000, 2500, 5000]
+samples = [100, 200, 400, 600, 800, 1000, 2500, 5000]
 #samples = [100, 250, 500, 750, 1000, 2500, 5000]
-samples = [100, 250, 500]
-features = [10, 20, 30]
-classes = [1, 2, 5, 8]
+features = [10, 20, 30, 40, 50, 80]
+classes = [1, 2, 3, 4, 5, 8, 10, 12, 15]
 informative = [0.5, 0.75, 1]
 folder = "./data"
 
