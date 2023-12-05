@@ -35,29 +35,22 @@ def average_common_neighbors(X_initial, X_reduced, k):
         common_neighbors.append(len(neighbors_initial.intersection(neighbors_reduced)))
     
     
-    print(len(neighbors_reduced))
     
     avg_common_neighbors = (np.mean(common_neighbors)/k)*100
 
     return avg_common_neighbors
 
 
-def metrics_all(input_data,input_t_sne):
-    for file in os.listdir(input):
-        average_common_neighbors
 
 
+def std_ratios(X_initial,X_reduced):
 
+    distances_initial = euclidean_distances(X_initial)  #Je calcule la distance euclidienne entre chaque paire de points dans l'espace initial
 
+    distances_reduced = euclidean_distances(X_reduced)  #Je calcule la distance euclidienne entre chaque paire de points dans l'espace réduit
 
+    ratio = distances_reduced / (distances_initial + 0.00000000001) # au cas ou il y a une valeur = 0 meme si je pense que c'est impossoble
 
+    std_ratios = np.std(ratio)
 
-
-
-
-
-"""Utilisation de la fonction
-avg_common_neighbors10 = average_common_neighbors(X, X_tsne, k=10)
-avg_common_neighbors40 = average_common_neighbors(X, X_tsne, k=40)
-print("Le pourcentage moyen de voisins en commun en utilisant k=10 voisins est" ,avg_common_neighbors10, "%")
-print("Le pourcentage moyen de voisins en commun en utilisant k=40 voisins est" ,avg_common_neighbors40, "%")"""
+    return std_ratios
