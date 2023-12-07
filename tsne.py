@@ -44,10 +44,10 @@ def tsne_metrics(data_liste, distr, perplexity, n_iter, classe):
             name = df_t_sne.name
             param = name.split("_")
             del(param[-1])
-            print(param)
+            
 
-            df_t_sne = df_t_sne.drop('class', axis=1) 
-            print(df_t_sne)
+            if classe :
+                df_t_sne = df_t_sne.drop('class', axis=1) 
 
             param.append(average_common_neighbors(df_data, df_t_sne, 10))
             param.append(average_common_neighbors(df_data, df_t_sne, 40))
