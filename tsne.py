@@ -71,7 +71,7 @@ def tsne_metrics(data, distr, perplexity, n_iter, classe):
     line = 1
 
     for file_name in data:
-        df_data = pd.read_csv(f'./data/{distr}/{file_name}.csv')
+        df_data = pd.read_csv(f'./data/{distr}/{file_name}.csv', index_col=0)
         df_data.name = file_name
         dfs_t_sne = tsne(df_data, f'./t_sne/{distr}', perplexity, n_iter, classe)
 
@@ -82,6 +82,7 @@ def tsne_metrics(data, distr, perplexity, n_iter, classe):
 
             if classe :
                 df_t_sne = df_t_sne.drop('class', axis=1) 
+                df_data = df_data.drop('class', axis=1) 
 
             param.append(average_common_neighbors(df_data, df_t_sne, 10))
             param.append(average_common_neighbors(df_data, df_t_sne, 40))
